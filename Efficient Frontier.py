@@ -142,6 +142,10 @@ def msr(risk_free_rate, er, cov):
                        bounds=bounds)
     return weights.x
 
+# In the Markovits approach, precise estimation of expected returns is crucial, making it impractical for our purposes. 
+# However, on the efficient frontier, there exists a single portfolio that does not require an estimation of expected 
+# return: the Global Minimum Variance (GMV) portfolio. This portfolio, located at the curve's lowest point of volatility, 
+# represents the minimum possible risk. Another alternative is the Equal Weight portfolio approach.
 
 def gmv(cov):
     """
@@ -184,7 +188,7 @@ def plot_ef(n_points, er, cov, style='.-', legend=False, show_cml=False, risk_fr
         cml_x = [0, vol_msr]
         cml_y = [risk_free_rate, r_msr]
         ax.plot(cml_x, cml_y, color='green', marker='o', linestyle='dashed', linewidth=2, markersize=10)
-    if show_ew:
+    if show_ew:   # it shows the equally weighted portfolio
         n = er.shape[0]
         w_ew = np.repeat(1 / n, n)
         r_ew = portfolio_return(w_ew, er)
