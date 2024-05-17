@@ -199,3 +199,18 @@ def plot_ef(n_points, er, cov, style='.-', legend=False, show_cml=False, risk_fr
         ax.plot([vol_gmv], [r_gmv], color='midnightblue', marker='o', markersize=10)
 
         return ax
+
+
+ax = plot_ef(20, er, cov)
+ax.set_xlim(left=0)
+rf = 0.1
+w_msr = msr(rf, er, cov)
+r_msr = portfolio_return(w_msr, er)
+vol_msr = portfolio_vol(w_msr, cov)
+# add CML
+cml_x = [0, vol_msr]
+cml_y = [rf, r_msr]
+ax.plot(cml_x, cml_y, color="green", marker="o", linestyle="dashed")
+
+
+
